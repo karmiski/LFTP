@@ -12,7 +12,7 @@
 #include        <stdio.h>
 #include        <stdlib.h>
 #include        <string.h>
-#include 	<unistd.h>
+#include 	    <unistd.h>
 
 #include        "network_module.h" //moduł komunikacji sieciowej
 //TCP - port 2345
@@ -25,5 +25,21 @@ int main()
         return 1;
     }
 
+    while(1) {
+        socket_fds client = network_s_accept(fds);
+        
+        if (client.tcp_fd != -1) {
+            // Obsługa klienta TCP
+            write(client.tcp_fd, "Witaj przez TCP!\n", 17);
+            close(client.tcp_fd);
+        }
+        
+        if (client.sctp_fd != -1) {
+            // Obsługa klienta SCTP
+            write(client.sctp_fd, "Witaj przez SCTP!\n", 18);
+            close(client.sctp_fd);
+        }
+    }
     return 0;
+
 }

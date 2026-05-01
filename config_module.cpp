@@ -26,10 +26,12 @@ int config_get(config &cfg)
     if (strcmp(protocol_str, "TCP") == 0) 
     {
         cfg.port = TCP_PORT;
+        cfg.protocol = 0; // TCP
     } 
     else if (strcmp(protocol_str, "SCTP") == 0) 
     {
         cfg.port = SCTP_PORT;
+        cfg.protocol = IPPROTO_SCTP; // SCTP
     } 
     else 
     {

@@ -18,7 +18,7 @@
 //moduł transferu plików
 #include        "config_module.h" //moduł konfiguracji
 #include        "command_module.h" //moduł protokołu aplikacyjnego
-
+#include        "network_module.h" //moduł komunikacji sieciowej
 int main()
 {
     //pobieranie konfiguracji od użytkownika
@@ -28,14 +28,27 @@ int main()
         return 1;
     }
     
-    //TODO POŁĄCZENIE Z SERWEREM NA PODSTAWIE KONFIGURACJI (TCP LUB SCTP, ADRES IP)
+    int sockfd = network_c_init(cfg);
+    if (sockfd < 0) {
+        fprintf(stderr, "Błąd połączenia z serwerem\n");
+        return 1;
+    }
+    else
+    {
+        char welcome_buf[1024];
+        ssize_t n = read(sockfd, welcome_buf, sizeof(welcome_buf) - 1);
+        if (n > 0) {
+        welcome_buf[n] = '\0'; // Terminacja stringa
+        printf("Serwer mówi: %s", welcome_buf);
+        }
+    }
 
-    
     //odczytywanie komend od użytkownika
     char buf[100];
     while(scanf("%99s", buf) == 1)
-    {
-        command_handle(buf); 
+    {   
+        //wykonywanie komend
+        command_c_handle(buf, sockfd); 
     };
     return 0;
 }
