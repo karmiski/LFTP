@@ -8,7 +8,7 @@ SERVER = serv
 CLIENT_SRC = cliv.cpp config_module.cpp command_module.cpp network_module.cpp
 CLIENT_OBJ = $(CLIENT_SRC:.cpp=.o)
 
-SERVER_SRC = serv.cpp network_module.cpp config_module.cpp
+SERVER_SRC = serv.cpp network_module.cpp command_module.cpp config_module.cpp
 SERVER_OBJ = $(SERVER_SRC:.cpp=.o)
 
 HEADERS = network_module.h config_module.h command_module.h

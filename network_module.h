@@ -2,6 +2,7 @@
 #define NETWORK_MODULE_H
 
 #include    "config_module.h" //moduł konfiguracji
+
 struct socket_fds
 {
         int tcp_fd = -1;

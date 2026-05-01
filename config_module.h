@@ -2,7 +2,7 @@
 #define CONFIG_MODULE_H
 
 #include <netinet/in.h>
-#include "config_module.h" //moduł konfiguracji
+
 struct config
 {
     int port; //port serwera, TCP = 2345, SCTP = 6789

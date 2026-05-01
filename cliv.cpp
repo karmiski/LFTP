@@ -45,10 +45,15 @@ int main()
 
     //odczytywanie komend od użytkownika
     char buf[100];
-    while(scanf("%99s", buf) == 1)
-    {   
-        //wykonywanie komend
-        command_c_handle(buf, sockfd); 
-    };
+
+    while(fgets(buf, sizeof(buf), stdin) != NULL) {
+        // fgets zostawia znak nowej linii na końcu
+        buf[strcspn(buf, "\n")] = 0;
+
+        if (strlen(buf) > 0) {
+            command_c_handle(buf, sockfd);
+        }
+        printf("ftp> ");
+    }
     return 0;
 }
