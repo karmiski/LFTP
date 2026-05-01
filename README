@@ -1,0 +1,13 @@
+serwer nasłuchuje na 2 portach, 2345 - TCP, 6789 - STCP, klient łączy się tam gdzie chce
+
+
+nazewnictwo
+cliv.cpp - klient
+serv.cpp - serwer
+x_module.cpp - moduły
+x_module.h - headery
+
+moduły porzebne do klienta:
+config, command, 
+
+moduły potrzebne do serwera:

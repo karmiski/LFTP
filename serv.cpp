@@ -1,4 +1,4 @@
-//moduł klienta
+//moduł serwera
 #include        <sys/types.h>   /* basic system data types */
 #include        <sys/socket.h>  /* basic socket definitions */
 #include        <sys/time.h>    /* timeval{} for select() */
@@ -14,28 +14,16 @@
 #include        <string.h>
 #include 	<unistd.h>
 
-//moduł komunikacji sieciowej
-//moduł transferu plików
-#include        "config_module.h" //moduł konfiguracji
-#include        "command_module.h" //moduł protokołu aplikacyjnego
-
+#include        "network_module.h" //moduł komunikacji sieciowej
+//TCP - port 2345
+//SCTP - port 6789
 int main()
 {
-    //pobieranie konfiguracji od użytkownika
-    config cfg; 
-    if (config_get(cfg) < 0) {
-        fprintf(stderr, "Błąd konfiguracji\n");
+    socket_fds fds = network_s_init();
+    if(fds.tcp_fd < 0 || fds.sctp_fd < 0) {
+        fprintf(stderr, "Błąd podczas inicjalizacji modułu komunikacji sieciowej\n");
         return 1;
     }
-    
-    //TODO POŁĄCZENIE Z SERWEREM NA PODSTAWIE KONFIGURACJI (TCP LUB SCTP, ADRES IP)
 
-    
-    //odczytywanie komend od użytkownika
-    char buf[100];
-    while(scanf("%99s", buf) == 1)
-    {
-        command_handle(buf); 
-    };
     return 0;
 }

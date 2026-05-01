@@ -15,6 +15,9 @@
 
 #include        "config_module.h" //moduł konfiguracji
 
+#define TCP_PORT 2345
+#define SCTP_PORT 6789
+
 int config_get(config &cfg)
 {
     printf("Podaj protokół komunikacyjny (TCP lub SCTP): ");
@@ -22,11 +25,11 @@ int config_get(config &cfg)
     scanf("%9s", protocol_str);
     if (strcmp(protocol_str, "TCP") == 0) 
     {
-        cfg.protocol = 1;
+        cfg.port = TCP_PORT;
     } 
     else if (strcmp(protocol_str, "SCTP") == 0) 
     {
-        cfg.protocol = 2;
+        cfg.port = SCTP_PORT;
     } 
     else 
     {
@@ -41,6 +44,6 @@ int config_get(config &cfg)
         fprintf(stderr, "Nieprawidłowy adres: %s\n", addr_str);
         return -1;
     }
-    printf("Konfiguracja: protokół = %s, adres = %s\n", protocol_str, addr_str);
+    printf("Konfiguracja: port = %d, adres = %s\n", cfg.port, addr_str);
     return 0;
 }

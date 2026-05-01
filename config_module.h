@@ -5,7 +5,7 @@
 
 struct config
 {
-    int protocol = 0; //protokół komunikacyjny (TCP = 1, SCTP = 2)
+    int port; //port serwera, TCP = 2345, SCTP = 6789
     struct in_addr addr; //adres serwera (IPv4)
 };
 
